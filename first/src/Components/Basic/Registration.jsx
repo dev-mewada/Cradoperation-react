@@ -1,41 +1,91 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Registration.css";
 
 function Registration() {
 
     const [users, setUsers] = useState([]);
-
     const [editUser, setEditUser] = useState(null);
 
-           const [email, setEmail] = useState("");
-           const [password, setPassword] = useState("");
-    
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const [selectedLanguages, setSelectedLanguages] = useState([]);
+
+    const languages = [
+        "JavaScript",
+        "React",
+        "Python",
+        "Java",
+        "C++",
+        "C#",
+        "PHP",
+        "TypeScript"
+    ];
+
+    useEffect(() => {
+
+        if (editUser) {
+
+            setEmail(editUser.email || "");
+            setPassword(editUser.password || "");
+            setSelectedLanguages(editUser.codingLanguage || []);
+
+        } else {
+
+            setEmail("");
+            setPassword("");
+            setSelectedLanguages([]);
+
+        }
+
+    }, [editUser]);
+
+
+    function handleLanguageChange(language) {
+
+        setSelectedLanguages((previousLanguages) => {
+
+            if (previousLanguages.includes(language)) {
+
+                return previousLanguages.filter(
+                    (item) => item !== language
+                );
+
+            } else {
+
+                return [
+                    ...previousLanguages,
+                    language
+                ];
+
+            }
+
+        });
+
+    }
+
 
     function handleSubmit(event) {
 
         event.preventDefault();
 
-
         const imageFile =
             event.target.profileImage.files[0];
 
-          const selectedLanguages = Array.from(
-        event.target.codingLanguage.selectedOptions,
-        option => option.value
-            );
-       
+        const user = {
 
-        const user = { id: editUser
-                ? editUser.id: Date.now(),
+            id: editUser
+                ? editUser.id
+                : Date.now(),
 
             fullName:
                 event.target.fullName.value,
 
             email:
-                event.target.email.value,
+                email,
 
             password:
-                event.target.password.value,
+                password,
 
             phone:
                 event.target.phone.value,
@@ -49,60 +99,58 @@ function Registration() {
             gender:
                 event.target.gender.value,
 
-            codingLanguage:selectedLanguages,
-                
+            codingLanguage:
+                selectedLanguages,
 
             profileImage:
                 editUser
                     ? editUser.profileImage
                     : ""
-        };
 
+        };
 
 
         if (imageFile) {
 
             const reader = new FileReader();
 
-
             reader.onload = () => {
 
                 user.profileImage =
                     reader.result;
 
-
-                
-
                 if (editUser) {
 
-                    setUsers(
-                        users.map((item) =>
+                    setUsers((previousUsers) =>
+
+                        previousUsers.map((item) =>
                             item.id === editUser.id
                                 ? user
                                 : item
                         )
-                    );
 
+                    );
 
                     setEditUser(null);
 
-                }
+                } else {
 
+                    setUsers((previousUsers) => [
 
-                else {
-
-                    setUsers([
-                        ...users,
+                        ...previousUsers,
                         user
+
                     ]);
 
                 }
 
-
                 event.target.reset();
 
-            };
+                setEmail("");
+                setPassword("");
+                setSelectedLanguages([]);
 
+            };
 
             reader.readAsDataURL(imageFile);
 
@@ -110,41 +158,45 @@ function Registration() {
         }
 
 
-        
-
         if (editUser) {
 
-            setUsers(
-                users.map((item) =>
+            setUsers((previousUsers) =>
+
+                previousUsers.map((item) =>
                     item.id === editUser.id
                         ? user
                         : item
                 )
-            );
 
+            );
 
             setEditUser(null);
 
             event.target.reset();
 
+            setEmail("");
+            setPassword("");
+            setSelectedLanguages([]);
+
             return;
         }
 
 
-      
+        setUsers((previousUsers) => [
 
-        setUsers([
-            ...users,
+            ...previousUsers,
             user
-        ]);
 
+        ]);
 
         event.target.reset();
 
+        setEmail("");
+        setPassword("");
+        setSelectedLanguages([]);
+
     }
 
-
-    
 
     function handleEdit(id) {
 
@@ -153,21 +205,19 @@ function Registration() {
                 (user) => user.id === id
             );
 
-
         setEditUser(selectedUser);
 
-        console.log(selectedUser);
     }
 
 
-  
-
     function handleDelete(id) {
 
-        setUsers(
-            users.filter(
+        setUsers((previousUsers) =>
+
+            previousUsers.filter(
                 (user) => user.id !== id
             )
+
         );
 
     }
@@ -176,8 +226,6 @@ function Registration() {
     return (
 
         <div className="restaurant-container">
-
-
 
             <h2 className="table-title">
                 Users Data
@@ -193,23 +241,14 @@ function Registration() {
                         <tr>
 
                             <th>Image</th>
-
                             <th>Name</th>
-
                             <th>Email</th>
-
                             <th>Password</th>
-
                             <th>Phone</th>
-
                             <th>DOB</th>
-
                             <th>Address</th>
-
                             <th>Gender</th>
-
                             <th>Favorite Coding</th>
-
                             <th>Action</th>
 
                         </tr>
@@ -222,9 +261,6 @@ function Registration() {
                         {users.map((user) => (
 
                             <tr key={user.id}>
-
-
-                               
 
                                 <td>
 
@@ -247,7 +283,6 @@ function Registration() {
                                 </td>
 
 
-
                                 <td
                                     onClick={() =>
                                         handleEdit(user.id)
@@ -261,16 +296,10 @@ function Registration() {
                                 </td>
 
 
-                              
-
                                 <td>
-
                                     {user.email}
-
                                 </td>
 
-
-                                {/* PASSWORD */}
 
                                 <td>
 
@@ -285,57 +314,36 @@ function Registration() {
                                         user.password.slice(-2)
 
                                         : "No Password"
+
                                     }
 
                                 </td>
 
 
-                             
-
                                 <td>
-
                                     {user.phone}
-
                                 </td>
 
 
-                              
-
                                 <td>
-
                                     {user.dob}
-
                                 </td>
 
 
-                              
-
                                 <td>
-
                                     {user.address}
-
                                 </td>
 
 
-                                
-
                                 <td>
-
                                     {user.gender}
-
                                 </td>
 
-
-                                
 
                                 <td>
-
-                                    {user.codingLanguage}
-
+                                    {user.codingLanguage.join(", ")}
                                 </td>
 
-
-                                
 
                                 <td>
 
@@ -349,7 +357,6 @@ function Registration() {
 
                                 </td>
 
-
                             </tr>
 
                         ))}
@@ -361,7 +368,6 @@ function Registration() {
             </div>
 
 
-
             <div
                 className={
                     editUser
@@ -370,7 +376,6 @@ function Registration() {
                 }
             >
 
-
                 <div
                     className={
                         editUser
@@ -378,8 +383,6 @@ function Registration() {
                             : ""
                     }
                 >
-
-
 
                     {editUser && (
 
@@ -396,9 +399,7 @@ function Registration() {
                             ) : (
 
                                 <div className="no-profile-image">
-
                                     😊
-
                                 </div>
 
                             )}
@@ -406,7 +407,6 @@ function Registration() {
                         </>
 
                     )}
-
 
 
                     <h2 className="form-title">
@@ -419,15 +419,10 @@ function Registration() {
                     </h2>
 
 
-                   
-
                     <form
                         className="registration-form"
                         onSubmit={handleSubmit}
                     >
-
-
-                      
 
                         <label
                             className="form-label"
@@ -449,6 +444,8 @@ function Registration() {
                                     ? editUser.fullName
                                     : ""
                             }
+
+                            required
                         />
 
 
@@ -457,8 +454,6 @@ function Registration() {
                             className="error"
                         ></p>
 
-
-                      
 
                         <label
                             className="form-label"
@@ -475,14 +470,15 @@ function Registration() {
                             name="email"
                             placeholder="Enter your email"
 
-                             value={email}
-                              onChange={(event) => setEmail(event.target.value)}
+                            value={email}
 
-                            defaultValue={
-                                editUser
-                                    ? editUser.email
-                                    : ""
+                            onChange={(event) =>
+                                setEmail(
+                                    event.target.value
+                                )
                             }
+
+                            required
                         />
 
 
@@ -491,8 +487,6 @@ function Registration() {
                             className="error"
                         ></p>
 
-
-                       
 
                         <label
                             className="form-label"
@@ -510,13 +504,14 @@ function Registration() {
                             placeholder="Enter your password"
 
                             value={password}
-                            onChange={(event) => setPassword(event.target.value)}
 
-                            defaultValue={
-                                editUser
-                                    ? editUser.password
-                                    : ""
+                            onChange={(event) =>
+                                setPassword(
+                                    event.target.value
+                                )
                             }
+
+                            required
                         />
 
 
@@ -525,8 +520,6 @@ function Registration() {
                             className="error"
                         ></p>
 
-
-                      
 
                         <label
                             className="form-label"
@@ -549,6 +542,8 @@ function Registration() {
                                     ? editUser.phone
                                     : ""
                             }
+
+                            required
                         />
 
 
@@ -557,8 +552,6 @@ function Registration() {
                             className="error"
                         ></p>
 
-
-                    
 
                         <label
                             className="form-label"
@@ -579,6 +572,8 @@ function Registration() {
                                     ? editUser.dob
                                     : ""
                             }
+
+                            required
                         />
 
 
@@ -587,8 +582,6 @@ function Registration() {
                             className="error"
                         ></p>
 
-
-                    
 
                         <label
                             className="form-label"
@@ -610,6 +603,9 @@ function Registration() {
                                     ? editUser.address
                                     : ""
                             }
+
+                            required
+
                         ></textarea>
 
 
@@ -619,17 +615,12 @@ function Registration() {
                         ></p>
 
 
-                        
-
                         <label className="form-label">
-
                             Gender
-
                         </label>
 
 
                         <div className="gender-box">
-
 
                             <label className="gender-option">
 
@@ -641,6 +632,8 @@ function Registration() {
                                     defaultChecked={
                                         editUser?.gender === "Male"
                                     }
+
+                                    required
                                 />
 
                                 Male
@@ -658,6 +651,7 @@ function Registration() {
                                     defaultChecked={
                                         editUser?.gender === "Female"
                                     }
+
                                 />
 
                                 Female
@@ -675,12 +669,12 @@ function Registration() {
                                     defaultChecked={
                                         editUser?.gender === "Other"
                                     }
+
                                 />
 
                                 Other
 
                             </label>
-
 
                         </div>
 
@@ -691,72 +685,50 @@ function Registration() {
                         ></p>
 
 
-                      
-
-                        <label
-                            className="form-label"
-                            htmlFor="codingLanguage"
-                        >
+                        <label className="form-label">
                             Favorite Coding Language
                         </label>
 
 
-                        <select
-                            className="form-input"
-                            id="codingLanguage"
-                            name="codingLanguage"
-                             multiple
-                            defaultValue={
-                                editUser
-                                    ? editUser.codingLanguage
-                                    : ""
-                            }
-                        >
+                        <div className="language-box">
 
-                            <option value="">
-                                Select your favorite language
-                            </option>
+                            {languages.map((language) => (
 
-                            <option value="JavaScript">
-                                JavaScript
-                            </option>
+                                <label
+                                    key={language}
+                                    className="language-option"
+                                >
 
-                            <option value="React">
-                                React
-                            </option>
+                                    <input
+                                        type="checkbox"
+                                        value={language}
 
-                            <option value="Python">
-                                Python
-                            </option>
+                                        checked={
+                                            selectedLanguages.includes(
+                                                language
+                                            )
+                                        }
 
-                            <option value="Java">
-                                Java
-                            </option>
+                                        onChange={() =>
+                                            handleLanguageChange(
+                                                language
+                                            )
+                                        }
+                                    />
 
-                            <option value="C++">
-                                C++
-                            </option>
+                                    {language}
 
-                            <option value="C#">
-                                C#
-                            </option>
+                                </label>
 
-                            <option value="PHP">
-                                PHP
-                            </option>
+                            ))}
 
-                            <option value="TypeScript">
-                                TypeScript
-                            </option>
-
-                        </select>
+                        </div>
 
 
                         <p
                             id="codingError"
                             className="error"
                         ></p>
-
 
 
                         <label
@@ -782,19 +754,18 @@ function Registration() {
                         ></p>
 
 
-                      
-
                         <div className="edit-buttons">
 
-
                             <button
-                                
-                             disabled={
-                                 email === "" ||
-                                 password === ""
-                                    }
+                                disabled={
+                                    email.trim() === "" ||
+                                    password.trim() === ""
+                                }
+
                                 type="submit"
+
                                 id="submitBtn"
+
                                 className="submit-btn"
                             >
 
@@ -805,8 +776,6 @@ function Registration() {
 
                             </button>
 
-
-                           
 
                             {editUser && (
 
@@ -825,17 +794,13 @@ function Registration() {
 
                             )}
 
-
                         </div>
 
-
                     </form>
-
 
                 </div>
 
             </div>
-
 
         </div>
 
