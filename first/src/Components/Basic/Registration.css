@@ -1,267 +1,799 @@
+/* =========================================================
+   UNIVERSAL SELECTOR
+   ========================================================= */
+
+/* * ka matlab page ke sabhi HTML elements */
 * {
+    /* Element ke andar ki default space remove */
     margin: 0;
+
+    /* Element ke andar ki default padding remove */
     padding: 0;
+
+    /* Width/height mein padding aur border ko include karta hai */
     box-sizing: border-box;
 }
 
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
 body {
+    /* Page par text ka font set kar rahe hain */
     font-family: Arial, sans-serif;
+
+    /* Puri website ka background color */
     background: #f4f6f8;
 }
 
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
 .restaurant-container {
+    /* Container ki width screen ki 90% hogi */
     width: 90%;
+
+    /* Container maximum 1100px se bada nahi hoga */
     max-width: 1100px;
+
+    /* 40px top-bottom margin
+       aur auto left-right margin */
     margin: 40px auto;
 }
 
 
-/* =========================
-   TABLE
-========================= */
+/* =========================================================
+   TABLE TITLE
+   ========================================================= */
 
 .table-title {
+    /* Heading ko center mein rakhta hai */
     text-align: center;
+
+    /* Heading ke neeche 20px space */
     margin-bottom: 20px;
+
+    /* Heading ka text color */
     color: #222;
 }
 
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
 .user-table {
+    /* Table ki width parent ki 100% */
     width: 100%;
+
+    /* Table ki borders ko combine karta hai */
     border-collapse: collapse;
+
+    /* Table ka background white */
     background: white;
+
+    /* Table ke neeche 40px space */
     margin-bottom: 40px;
+
+    /* Table ke around halka shadow */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
+
+/* Table ke heading aur data cells */
 .user-table th,
 .user-table td {
+
+    /* Cell ke andar 14px space */
     padding: 14px;
+
+    /* Har cell ke around border */
     border: 1px solid #ddd;
+
+    /* Cell ka text center */
     text-align: center;
 }
 
+
+/* =========================================================
+   TABLE HEADER
+   ========================================================= */
+
 .user-table th {
+
+    /* Header ka background black/dark */
     background: #222;
+
+    /* Header ka text white */
     color: white;
 }
 
+
+/* =========================================================
+   TABLE ROW HOVER
+   ========================================================= */
+
 .user-table tbody tr:hover {
+
+    /* Mouse row ke upar jaane par
+       background color change */
     background: #f5f5f5;
 }
 
 
-/* =========================
-   FORM
-========================= */
+/* =========================================================
+   USER NAME
+   ========================================================= */
+
+.user-name {
+
+    /* Mouse pointer hand mein change hoga */
+    cursor: pointer;
+
+    /* Name ka color blue */
+    color: #007bff;
+
+    /* Name ko thoda bold */
+    font-weight: 600;
+}
+
+
+/* Name par mouse le jaane par */
+.user-name:hover {
+
+    /* Name ke neeche line show hogi */
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   TABLE PROFILE IMAGE
+   ========================================================= */
+
+.profile-image {
+
+    /* Image ki width 60px */
+    width: 60px;
+
+    /* Image ki height 60px */
+    height: 60px;
+
+    /* Image ko box ke andar properly fit karta hai */
+    object-fit: cover;
+
+    /* 50% se image circular ho jayegi */
+    border-radius: 50%;
+}
+
+
+/* =========================================================
+   NO IMAGE
+   ========================================================= */
+
+.no-image {
+
+    /* Emoji/text ka size */
+    font-size: 30px;
+
+    /* Default margin remove */
+    margin: 0;
+}
+
+
+/* =========================================================
+   NORMAL FORM CONTAINER
+   ========================================================= */
 
 .form-container {
+
+    /* Form ki fixed width */
     width: 500px;
+
+    /* Screen chhoti hone par 100% tak shrink */
     max-width: 100%;
+
+    /* Form ko horizontally center */
     margin: auto;
+
+    /* Form ka background white */
     background: white;
+
+    /* Form ke andar 30px space */
     padding: 30px;
+
+    /* Corners ko round karta hai */
     border-radius: 10px;
+
+    /* Form ke around shadow */
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
+
+/* =========================================================
+   FORM TITLE
+   ========================================================= */
+
 .form-title {
+
+    /* Title center */
     text-align: center;
+
+    /* Title ke neeche 25px space */
     margin-bottom: 25px;
+
+    /* Title ka color */
     color: #222;
 }
 
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
 .registration-form {
+
+    /* Form ke elements ko flex container banata hai */
     display: flex;
+
+    /* Elements ko ek ke neeche ek rakhta hai */
     flex-direction: column;
 }
 
+
+/* =========================================================
+   FORM LABEL
+   ========================================================= */
+
 .form-label {
+
+    /* Label ke neeche 7px space */
     margin-bottom: 7px;
+
+    /* Label ko bold */
     font-weight: 600;
+
+    /* Label ka color */
     color: #333;
 }
 
+
+/* =========================================================
+   INPUT
+   ========================================================= */
+
 .form-input {
+
+    /* Input parent ki 100% width lega */
     width: 100%;
+
+    /* Input ke andar 12px space */
     padding: 12px;
+
+    /* Input ke neeche 5px space */
     margin-bottom: 5px;
+
+    /* Input ka border */
     border: 1px solid #ccc;
+
+    /* Input ke corners round */
     border-radius: 6px;
+
+    /* Browser ka default outline remove */
     outline: none;
+
+    /* Input text ka size */
     font-size: 15px;
 }
 
+
+/* Input par click karne par */
 .form-input:focus {
+
+    /* Focus hone par border blue */
     border-color: #007bff;
 }
 
 
-/* =========================
-   ERROR
-========================= */
+/* =========================================================
+   TEXTAREA
+   ========================================================= */
+
+.address-input {
+
+    /* User textarea ko vertically resize kar sakta hai */
+    resize: vertical;
+}
+
+
+/* =========================================================
+   ERROR MESSAGE
+   ========================================================= */
 
 .error {
+
+    /* Error text red */
     color: red;
+
+    /* Error text ka size */
     font-size: 13px;
+
+    /* Error ke liye minimum height
+       taaki form baar-baar jump na kare */
     min-height: 18px;
+
+    /* Error ke neeche 5px space */
     margin-bottom: 5px;
 }
 
 
-/* =========================
-   GENDER
-========================= */
+/* =========================================================
+   GENDER BOX
+   ========================================================= */
 
 .gender-box {
+
+    /* Gender options ko flex container */
     display: flex;
+
+    /* Options ke beech 25px gap */
     gap: 25px;
+
+    /* Upar-neeche 10px space */
     margin: 10px 0;
 }
 
+
+/* =========================================================
+   GENDER OPTION
+   ========================================================= */
+
 .gender-option {
+
+    /* Radio aur text ko flex mein rakhta hai */
     display: flex;
+
+    /* Vertically center */
     align-items: center;
+
+    /* Radio aur text ke beech 6px */
     gap: 6px;
+
+    /* Mouse pointer hand */
     cursor: pointer;
 }
 
 
-/* =========================
-   BUTTON
-========================= */
+/* =========================================================
+   CODING LANGUAGE BOX
+   ========================================================= */
+
+.language-box {
+
+    /* Languages ko grid container */
+    display: grid;
+
+    /* 2 columns create */
+    grid-template-columns: repeat(2, 1fr);
+
+    /* Options ke beech 10px */
+    gap: 10px;
+
+    /* Upar-neeche 10px */
+    margin: 10px 0;
+}
+
+
+/* =========================================================
+   CODING LANGUAGE OPTION
+   ========================================================= */
+
+.language-option {
+
+    /* Checkbox aur text ko flex */
+    display: flex;
+
+    /* Vertically center */
+    align-items: center;
+
+    /* Checkbox aur text ke beech 7px */
+    gap: 7px;
+
+    /* Mouse pointer hand */
+    cursor: pointer;
+}
+
+
+/* Language checkbox */
+.language-option input {
+
+    /* Checkbox par hand cursor */
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+   ========================================================= */
 
 .submit-btn {
+
+    /* Button ke upar 15px space */
     margin-top: 15px;
+
+    /* Button ke andar 12px space */
     padding: 12px;
+
+    /* Default border remove */
     border: none;
+
+    /* Button corners round */
     border-radius: 6px;
+
+    /* Button background blue */
     background: #007bff;
+
+    /* Button text white */
     color: white;
+
+    /* Text size */
     font-size: 16px;
+
+    /* Mouse pointer hand */
     cursor: pointer;
 }
 
+
+/* Submit button hover */
 .submit-btn:hover {
+
+    /* Mouse le jaane par dark blue */
     background: #0056b3;
 }
 
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* =========================================================
+   DISABLED SUBMIT BUTTON
+   ========================================================= */
 
+.submit-btn:disabled {
+
+    /* Disabled button grey */
+    background: #aaa;
+
+    /* Disabled button par not-allowed cursor */
+    cursor: not-allowed;
+
+    /* Button thoda transparent */
+    opacity: 0.7;
+}
+
+
+/* =========================================================
+   UPDATE BUTTON
+   ========================================================= */
+
+.update-btn {
+
+    /* Button ke upar 15px space */
+    margin-top: 15px;
+
+    /* Button ke andar space */
+    padding: 12px;
+
+    /* Border remove */
+    border: none;
+
+    /* Corners round */
+    border-radius: 6px;
+
+    /* Update button green */
+    background: #28a745;
+
+    /* Text white */
+    color: white;
+
+    /* Text size */
+    font-size: 16px;
+
+    /* Mouse pointer hand */
+    cursor: pointer;
+}
+
+
+/* Update button hover */
+.update-btn:hover {
+
+    /* Hover par darker green */
+    background: #218838;
+}
+
+
+/* =========================================================
+   DISABLED UPDATE BUTTON
+   ========================================================= */
+
+.update-btn:disabled {
+
+    /* Disabled hone par grey */
+    background: #aaa;
+
+    /* Not allowed cursor */
+    cursor: not-allowed;
+
+    /* Thoda transparent */
+    opacity: 0.7;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+.back-btn {
+
+    /* Button ke upar 10px space */
+    margin-top: 10px;
+
+    /* Button ke andar 12px space */
+    padding: 12px;
+
+    /* Border remove */
+    border: none;
+
+    /* Corners round */
+    border-radius: 6px;
+
+    /* Grey background */
+    background: #6c757d;
+
+    /* Text white */
+    color: white;
+
+    /* Text size */
+    font-size: 16px;
+
+    /* Mouse pointer hand */
+    cursor: pointer;
+}
+
+
+/* Back button hover */
+.back-btn:hover {
+
+    /* Hover par darker grey */
+    background: #5a6268;
+}
+
+
+/* =========================================================
+   IMAGE INPUT
+   ========================================================= */
+
+.image-input {
+
+    /* File select karte waqt hand cursor */
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   MODAL OVERLAY
+   ========================================================= */
+
+.modal-overlay {
+
+    /* Element ko screen ke according fixed rakhta hai */
+    position: fixed;
+
+    /* Screen ke top se 0 */
+    top: 0;
+
+    /* Screen ke left se 0 */
+    left: 0;
+
+    /* Full screen width */
+    width: 100%;
+
+    /* Full screen height */
+    height: 100%;
+
+    /* Background ke upar black transparent layer */
+    background: rgba(0, 0, 0, 0.6);
+
+    /* Flexbox activate */
+    display: flex;
+
+    /* Modal ko horizontally center */
+    justify-content: center;
+
+    /* Modal ko vertically center */
+    align-items: center;
+
+    /* Modal ko doosre elements ke upar */
+    z-index: 1000;
+
+    /* Mobile screen par edge se 20px space */
+    padding: 20px;
+}
+
+
+/* =========================================================
+   MODAL CONTENT
+========================================================= */
+
+.modal-content {
+
+    /* Modal ki width 90% */
+    width: 90%;
+
+    /* Maximum width 750px */
+    max-width: 750px;
+
+    /* Maximum height screen ki 90% */
+    max-height: 90vh;
+
+    /* Content zyada hone par vertical scroll */
+    overflow-y: auto;
+
+    /* Modal ka background white */
+    background: white;
+
+    /* Modal ke andar 30px space */
+    padding: 30px;
+
+    /* Modal corners round */
+    border-radius: 15px;
+
+    /* Padding ko width ke andar include */
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   LARGE EDIT PROFILE IMAGE
+========================================================= */
+
+.edit-profile-image {
+
+    /* Image ko block element */
+    display: block;
+
+    /* Edit popup mein image ki width */
+    width: 180px;
+
+    /* Edit popup mein image ki height */
+    height: 180px;
+
+    /* Image ko box ke andar properly fit */
+    object-fit: cover;
+
+    /* Image circular */
+    border-radius: 50%;
+
+    /* Image center mein
+       aur neeche 20px space */
+    margin: 0 auto 20px;
+}
+
+
+/* =========================================================
+   NO PROFILE IMAGE
+========================================================= */
+
+.no-profile-image {
+
+    /* Empty image box ki width */
+    width: 180px;
+
+    /* Empty image box ki height */
+    height: 180px;
+
+    /* Box ko circular */
+    border-radius: 50%;
+
+    /* Background light grey */
+    background: #eee;
+
+    /* Flex activate */
+    display: flex;
+
+    /* Emoji horizontally center */
+    justify-content: center;
+
+    /* Emoji vertically center */
+    align-items: center;
+
+    /* Emoji ka size */
+    font-size: 70px;
+
+    /* Box center
+       aur neeche 20px space */
+    margin: 0 auto 20px;
+}
+
+
+/* =========================================================
+   EDIT BUTTONS
+========================================================= */
+
+.edit-buttons {
+
+    /* Buttons ko flex container */
+    display: flex;
+
+    /* Buttons ke beech 10px */
+    gap: 10px;
+
+    /* Buttons ke upar 20px */
+    margin-top: 20px;
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN
+========================================================= */
+
+/* Jab screen 700px ya usse chhoti ho */
 @media (max-width: 700px) {
 
+
+    /* Main container ko 95% width */
     .restaurant-container {
         width: 95%;
     }
 
+
+    /* Mobile par table ka font chhota */
     .user-table {
         font-size: 12px;
     }
 
+
+    /* Mobile table cells ki padding kam */
     .user-table th,
     .user-table td {
         padding: 8px;
     }
 
+
+    /* Gender options vertical ho jayenge */
     .gender-box {
         flex-direction: column;
+
+        /* Options ke beech 10px */
         gap: 10px;
     }
-}
-.user-name {
-    cursor: pointer;
-}
 
-.profile-image {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 50%;
-}
 
-.no-image {
-    font-size: 30px;
-    margin: 0;
-}
+    /* Mobile par languages
+       ek column mein */
+    .language-box {
+        grid-template-columns: 1fr;
+    }
 
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
 
-    width: 100%;
-    height: 100%;
+    /* Mobile modal ki width */
+    .modal-content {
+        width: 95%;
 
-    background: rgba(0, 0, 0, 0.6);
+        /* Mobile par padding kam */
+        padding: 20px;
+    }
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-    z-index: 1000;
-}
+    /* Mobile par profile image chhoti */
+    .edit-profile-image,
+    .no-profile-image {
+        width: 130px;
+        height: 130px;
+    }
 
-.modal-content {
-    width: 90%;
-    max-width: 750px;
 
-    max-height: 90vh;
-
-    overflow-y: auto;
-
-    background: white;
-
-    padding: 30px;
-
-    border-radius: 15px;
-
-    box-sizing: border-box;
-}
-
-.edit-profile-image {
-    display: block;
-
-    width: 180px;
-    height: 180px;
-
-    object-fit: cover;
-
-    border-radius: 50%;
-
-    margin: 0 auto 20px;
-}
-
-.no-profile-image {
-    width: 180px;
-    height: 180px;
-
-    border-radius: 50%;
-
-    background: #eee;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-size: 70px;
-
-    margin: 0 auto 20px;
-}
-
-.edit-buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.back-btn {
-    padding: 10px 20px;
-
-    border: none;
-    border-radius: 6px;
-
-    cursor: pointer;
+    /* Mobile par emoji chhota */
+    .no-profile-image {
+        font-size: 50px;
+    }
 }

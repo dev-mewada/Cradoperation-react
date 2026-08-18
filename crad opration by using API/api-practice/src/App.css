@@ -1,0 +1,165 @@
+/* =========================
+   GLOBAL
+========================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+}
+
+
+/* =========================
+   REGISTRATION FORM
+========================= */
+
+.registration-form {
+    width: 400px;
+    margin: 40px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.registration-form h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.registration-form input {
+    width: 100%;
+    padding: 12px 14px;
+
+    border: 1px solid #ccc;
+    border-radius: 7px;
+
+    font-size: 15px;
+    outline: none;
+}
+
+.registration-form input:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+}
+
+.registration-form button {
+    width: 100%;
+    padding: 12px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #4f46e5;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.registration-form button:hover {
+    background: #3730a3;
+}
+
+
+/* =========================
+   TABLE CONTAINER
+========================= */
+
+.table-container {
+    width: 95%;
+    margin: 40px auto;
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+    overflow-x: auto;
+}
+
+.table-container h2 {
+    margin-bottom: 20px;
+
+    font-size: 24px;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.users-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    font-size: 15px;
+}
+
+.users-table th,
+.users-table td {
+    padding: 14px;
+
+    border-bottom: 1px solid #ddd;
+
+    text-align: left;
+}
+
+.users-table th {
+    background: #4f46e5;
+
+    color: white;
+
+    font-weight: bold;
+}
+
+.users-table td {
+    color: #333;
+}
+
+.users-table tbody tr:hover {
+    background: #f5f5f5;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .registration-form {
+        width: 100%;
+        margin: 20px auto;
+    }
+
+    .table-container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .users-table {
+        min-width: 600px;
+    }
+}
