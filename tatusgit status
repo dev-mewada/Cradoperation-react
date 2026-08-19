@@ -1,0 +1,281 @@
+[1mdiff --git a/first/src/Components/Basic/Registration.jsx b/first/src/Components/Basic/Registration.jsx[m
+[1mindex 7f5f946..f75681f 100644[m
+[1m--- a/first/src/Components/Basic/Registration.jsx[m
+[1m+++ b/first/src/Components/Basic/Registration.jsx[m
+[36m@@ -1,41 +1,91 @@[m
+[31m-import { useState } from "react";[m
+[32m+[m[32mimport { useState, useEffect } from "react";[m
+ import "./Registration.css";[m
+ [m
+ function Registration() {[m
+ [m
+     const [users, setUsers] = useState([]);[m
+[31m-[m
+     const [editUser, setEditUser] = useState(null);[m
+ [m
+[31m-           const [email, setEmail] = useState("");[m
+[31m-           const [password, setPassword] = useState("");[m
+[31m-    [m
+[32m+[m[32m    const [email, setEmail] = useState("");[m
+[32m+[m[32m    const [password, setPassword] = useState("");[m
+[32m+[m
+[32m+[m[32m    const [selectedLanguages, setSelectedLanguages] = useState([]);[m
+[32m+[m
+[32m+[m[32m    const languages = [[m
+[32m+[m[32m        "JavaScript",[m
+[32m+[m[32m        "React",[m
+[32m+[m[32m        "Python",[m
+[32m+[m[32m        "Java",[m
+[32m+[m[32m        "C++",[m
+[32m+[m[32m        "C#",[m
+[32m+[m[32m        "PHP",[m
+[32m+[m[32m        "TypeScript"[m
+[32m+[m[32m    ];[m
+[32m+[m
+[32m+[m[32m    useEffect(() => {[m
+[32m+[m
+[32m+[m[32m        if (editUser) {[m
+[32m+[m
+[32m+[m[32m            setEmail(editUser.email || "");[m
+[32m+[m[32m            setPassword(editUser.password || "");[m
+[32m+[m[32m            setSelectedLanguages(editUser.codingLanguage || []);[m
+[32m+[m
+[32m+[m[32m        } else {[m
+[32m+[m
+[32m+[m[32m            setEmail("");[m
+[32m+[m[32m            setPassword("");[m
+[32m+[m[32m            setSelectedLanguages([]);[m
+[32m+[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m    }, [editUser]);[m
+[32m+[m
+[32m+[m
+[32m+[m[32m    function handleLanguageChange(language) {[m
+[32m+[m
+[32m+[m[32m        setSelectedLanguages((previousLanguages) => {[m
+[32m+[m
+[32m+[m[32m            if (previousLanguages.includes(language)) {[m
+[32m+[m
+[32m+[m[32m                return previousLanguages.filter([m
+[32m+[m[32m                    (item) => item !== language[m
+[32m+[m[32m                );[m
+[32m+[m
+[32m+[m[32m            } else {[m
+[32m+[m
+[32m+[m[32m                return [[m
+[32m+[m[32m                    ...previousLanguages,[m
+[32m+[m[32m                    language[m
+[32m+[m[32m                ];[m
+[32m+[m
+[32m+[m[32m            }[m
+[32m+[m
+[32m+[m[32m        });[m
+[32m+[m
+[32m+[m[32m    }[m
+[32m+[m
+ [m
+     function handleSubmit(event) {[m
+ [m
+         event.preventDefault();[m
+ [m
+[31m-[m
+         const imageFile =[m
+             event.target.profileImage.files[0];[m
+ [m
+[31m-          const selectedLanguages = Array.from([m
+[31m-        event.target.codingLanguage.selectedOptions,[m
+[31m-        option => option.value[m
+[31m-            );[m
+[31m-       [m
+[32m+[m[32m        const user = {[m
+ [m
+[31m-        const user = { id: editUser[m
+[31m-                ? editUser.id: Date.now(),[m
+[32m+[m[32m            id: editUser[m
+[32m+[m[32m                ? editUser.id[m
+[32m+[m[32m                : Date.now(),[m
+ [m
+             fullName:[m
+                 event.target.fullName.value,[m
+ [m
+             email:[m
+[31m-                event.target.email.value,[m
+[32m+[m[32m                email,[m
+ [m
+             password:[m
+[31m-                event.target.password.value,[m
+[32m+[m[32m                password,[m
+ [m
+             phone:[m
+                 event.target.phone.value,[m
+[36m@@ -49,60 +99,58 @@[m [mfunction Registration() {[m
+             gender:[m
+                 event.target.gender.value,[m
+ [m
+[31m-            codingLanguage:selectedLanguages,[m
+[31m-                [m
+[32m+[m[32m            codingLanguage:[m
+[32m+[m[32m                selectedLanguages,[m
+ [m
+             profileImage:[m
+                 editUser[m
+                     ? editUser.profileImage[m
+                     : ""[m
+[31m-        };[m
+ [m
+[32m+[m[32m        };[m
+ [m
+ [m
+         if (imageFile) {[m
+ [m
+             const reader = new FileReader();[m
+ [m
+[31m-[m
+             reader.onload = () => {[m
+ [m
+                 user.profileImage =[m
+                     reader.result;[m
+ [m
+[31m-[m
+[31m-                [m
+[31m-[m
+                 if (editUser) {[m
+ [m
+[31m-                    setUsers([m
+[31m-                        users.map((item) =>[m
+[32m+[m[32m                    setUsers((previousUsers) =>[m
+[32m+[m
+[32m+[m[32m                        previousUsers.map((item) =>[m
+                             item.id === editUser.id[m
+                                 ? user[m
+                                 : item[m
+                         )[m
+[31m-                    );[m
+ [m
+[32m+[m[32m                    );[m
+ [m
+                     setEditUser(null);[m
+ [m
+[31m-                }[m
+[32m+[m[32m                } else {[m
+ [m
+[32m+[m[32m                    setUsers((previousUsers) => [[m
+ [m
+[31m-                else {[m
+[31m-[m
+[31m-                    setUsers([[m
+[31m-                        ...users,[m
+[32m+[m[32m                        ...previousUsers,[m
+                         user[m
+[32m+[m
+                     ]);[m
+ [m
+                 }[m
+ [m
+[31m-[m
+                 event.target.reset();[m
+ [m
+[31m-            };[m
+[32m+[m[32m                setEmail("");[m
+[32m+[m[32m                setPassword("");[m
+[32m+[m[32m                setSelectedLanguages([]);[m
+ [m
+[32m+[m[32m            };[m
+ [m
+             reader.readAsDataURL(imageFile);[m
+ [m
+[36m@@ -110,41 +158,45 @@[m [mfunction Registration() {[m
+         }[m
+ [m
+ [m
+[31m-        [m
+[31m-[m
+         if (editUser) {[m
+ [m
+[31m-            setUsers([m
+[31m-                users.map((item) =>[m
+[32m+[m[32m            setUsers((previousUsers) =>[m
+[32m+[m
+[32m+[m[32m                previousUsers.map((item) =>[m
+                     item.id === editUser.id[m
+                         ? user[m
+                         : item[m
+                 )[m
+[31m-            );[m
+ [m
+[32m+[m[32m            );[m
+ [m
+             setEditUser(null);[m
+ [m
+             event.target.reset();[m
+ [m
+[32m+[m[32m            setEmail("");[m
+[32m+[m[32m            setPassword("");[m
+[32m+[m[32m            setSelectedLanguages([]);[m
+[32m+[m
+             return;[m
+         }[m
+ [m
+ [m
+[31m-      [m
+[32m+[m[32m        setUsers((previousUsers) => [[m
+ [m
+[31m-        setUsers([[m
+[31m-            ...users,[m
+[32m+[m[32m            ...previousUsers,[m
+             user[m
+[31m-        ]);[m
+ [m
+[32m+[m[32m        ]);[m
+ [m
+         event.target.reset();[m
+ [m
+[31m-    }[m
+[32m+[m[32m        setEmail("");[m
+[32m+[m[32m        setPassword("");[m
+[32m+[m[32m        setSelectedLanguages([]);[m
+ [m
+[32m+[m[32m    }[m
+ [m
+[31m-    [m
+ [m
+     function handleEdit(id) {[m
+ [m
+[36m@@ -153,21 +205,19 @@[m [mfunction Registration() {[m
+                 (user) => user.id === id[m
+             );[m
+ [m
+[31m-[m
+         setEditUser(selectedUser);[m
+ [m
+[31m-        console.log(selectedUser);[m
+     }[m
+ [m
+ [m
+[31m-  [m
+[31m-[m
+     function handleDelete(id) {[m
+ [m
+[31m-        setUsers([m
+[31m-            users.filter([m
+[32m+[m[32m        setUsers((previousUsers) =>[m
+[32m+[m
+[32m+[m[32m            previousUsers.filter([m
+                 (user) => user.id !== id[m
+             )[m
+[32m+[m
+         );[m
+ [m
+     }[m
+[36m@@ -177,8 +227,6 @@[m [mfunction Registration() {[m
+ [m
+         <div className="restaurant-container">[m
+ [m
+[31m-[m
+[31m-[m
+             <h2 className="table-title">[m
+                 Users Data[m
+             </h2>[m
+[36m@@ -193,23 +241,14 @@[m [mfunction Registration() {[m
+                         <tr>
